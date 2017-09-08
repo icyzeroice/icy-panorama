@@ -1,7 +1,6 @@
 
-/!* Ice Zero */
-import NavBar from './components/nav-bar/nav-bar';
-import Stage from './components/stage/stage'
+/!* AUTHOR: Ice Zero */
 
-NavBar();
-Stage();
+import demoRectangle from './components/rectangle-demo.js'
+
+demoRectangle();

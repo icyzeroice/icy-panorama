@@ -22,7 +22,7 @@ let commonConfig = {
   module: {
     rules: [{
       test: /\.css$/,
-      loader: 'css-loader'
+      loader: 'style-loader!css-loader'
     }, {
       test: /\.(gif|png|jpe?g|svg)$/,
       loader: 'url-loader',
