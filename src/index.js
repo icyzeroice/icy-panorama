@@ -1,4 +1,3 @@
-
 /!* AUTHOR: Ice Zero */
 
 import Test from './components/test.js'
@@ -11,3 +10,14 @@ rect.start();
 // test
 let test = new Test('x', 'y');
 test.p();
+
+
+// ! output !
+class main {
+  constructor () {
+
+  }
+
+}
+
+export default main;

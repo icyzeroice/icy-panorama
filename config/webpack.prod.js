@@ -7,7 +7,7 @@ const commonConfig = require('./webpack.common');
 let prodConfig = merge(commonConfig, {
   output: {
     path: path.resolve(__dirname, '../dist/'),
-    filename: '[name].bundle.js',
+    filename: 'icy-paronama.js',
     publicPath: './'
   },
   plugins: [
