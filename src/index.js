@@ -1,6 +1,13 @@
 
 /!* AUTHOR: Ice Zero */
 
-import demoRectangle from './components/rectangle-demo.js'
+import Test from './components/test.js'
+import DemoRectangle from './components/rectangle-demo.js'
 
-demoRectangle();
+let container = document.getElementById('app');
+let rect = new DemoRectangle(container);
+rect.start();
+
+// test
+let test = new Test('x', 'y');
+test.p();
