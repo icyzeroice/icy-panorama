@@ -5,8 +5,8 @@
  * --> renderer
  */
 
-import '../css/rectangle-demo.css'
-import * as THREE from 'three'
+import '../css/rectangle-demo.css';
+import * as THREE from 'three';
 
 class Demo {
   constructor (container) {
@@ -16,10 +16,10 @@ class Demo {
     this.w = this.container.clientWidth;
     this.toggle = true;
 
-    this.scene = new Object();
-    this.camera = new Object();
-    this.renderer = new Object();
-    this.cube = new Object();
+    this.scene = {};
+    this.camera = {};
+    this.renderer = {};
+    this.cube = {};
   }
 
   _initRenderer () {

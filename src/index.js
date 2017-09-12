@@ -1,23 +1,18 @@
 /!* AUTHOR: Ice Zero */
+import IcyPano from './components/icy-panorama.js';
+import './css/index.css';
+import pano1 from './assets/pano1.jpg'
 
-import Test from './components/test.js'
-import DemoRectangle from './components/rectangle-demo.js'
+/* output */
+export default IcyPano;
 
+/* usage */
 let container = document.getElementById('app');
-let rect = new DemoRectangle(container);
-rect.start();
+let panorama = new IcyPano({
+  container: container,
+  picUrl: pano1
+});
 
-// test
-let test = new Test('x', 'y');
-test.p();
-
-
-// ! output !
-class main {
-  constructor () {
-
-  }
-
-}
-
-export default main;
+panorama.start();
+let handle = panorama.TVOSOperation();
+// panorama.suspend(handle);
