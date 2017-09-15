@@ -2,7 +2,7 @@
   "name": "icy-panorama",
   "version": "0.3.0",
   "description": "based on three.js",
-  "main": "./src/components/icy-paronama.js",
+  "main": "./src/components/icy-panorama.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node ./config/dev-server.js",

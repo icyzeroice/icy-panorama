@@ -5,7 +5,7 @@
  * @param {KeyboardEvent} keyend
  */
 function keyOperation() {
-  let t, initKeyCode;
+  let setTime, initKeyCode;
   let keyHold = document.createEvent('KeyboardEvent');
   let keyEnd = document.createEvent('KeyboardEvent');
   keyHold.initKeyboardEvent('keyhold', false, true);
@@ -21,15 +21,15 @@ function keyOperation() {
   document.addEventListener('keydown', (e) => {
 
     // refresh t
-    if (t) {
-      clearTimeout(t);
+    if (setTime) {
+      clearTimeout(setTime);
     } else {
       keyHold.keyCode = e.keyCode;
       document.dispatchEvent(keyHold);
     }
-    t = setTimeout(() => {
+    setTime = setTimeout(() => {
       document.dispatchEvent(keyEnd);
-      t = null;
+      setTime = null;
     }, 100);
   });
 }
