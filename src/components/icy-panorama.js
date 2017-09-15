@@ -204,6 +204,7 @@ class IcyPano {
   }
 
   start() {
+    ImgLoading(this.userConfig.picUrl);
     this._initScene();
     this._initCamera();
     this._initObject();

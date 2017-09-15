@@ -5,6 +5,11 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const commonConfig = require('./webpack.common');
 
 let prodConfig = merge(commonConfig, {
+  entry: {
+    app: [
+      path.resolve(__dirname, '../src/components/icy-panorama.js')
+    ]
+  },
   output: {
     path: path.resolve(__dirname, '../dist/'),
     filename: 'icy-paronama.js',

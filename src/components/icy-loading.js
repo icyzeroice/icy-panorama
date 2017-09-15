@@ -1,7 +1,5 @@
-class ImgLoading {
-  constructor () {
-    
-  }
+function ImgLoading(picUrl) {
+  
 }
 
 export default ImgLoading;

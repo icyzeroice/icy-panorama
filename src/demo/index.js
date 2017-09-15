@@ -1,10 +1,7 @@
 /!* AUTHOR: Ice Zero */
-import IcyPano from './components/icy-panorama.js';
-import './css/index.css';
-import pano from './assets/pano3.jpg'
-
-/* output */
-export default IcyPano;
+import IcyPano from '../components/icy-panorama.js';
+import './index.css';
+import pano from '../assets/pano3.jpg'
 
 /* usage */
 let container = document.getElementById('app');
