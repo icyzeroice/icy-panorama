@@ -1,3 +1,5 @@
+/!* AUTHOR: Ice Zero */
+
 import * as THREE from 'three';
 import ImgLoading from './icy-loading.js';
 import IcyKey from './icy-keyboard.js';
@@ -76,7 +78,7 @@ class IcyPano {
     this.scene = new THREE.Scene();
   }
 
-  _initObject() {
+  _initObject(img) {
 
     // add a ball to put a picture
     let geometry = new THREE.SphereBufferGeometry(
@@ -86,7 +88,7 @@ class IcyPano {
     );
     geometry.scale(-1, 1, 1);
     let material = new THREE.MeshBasicMaterial({
-      map: new THREE.TextureLoader().load(this.userConfig.picUrl)
+      map: new THREE.TextureLoader().load(img)
     });
     let panorama = new THREE.Mesh(geometry, material);
     this.scene.add(panorama);
@@ -204,12 +206,14 @@ class IcyPano {
   }
 
   start() {
-    ImgLoading(this.userConfig.picUrl);
+
     this._initScene();
     this._initCamera();
-    this._initObject();
-    this._initRenderer();
-    this._renderCircle();
+    let img = ImgLoading(this.userConfig.picUrl, this.container, (img) => {
+      this._initObject(img);
+      this._initRenderer();
+      this._renderCircle();
+    });
   }
 
   // remove operation for TVOS
