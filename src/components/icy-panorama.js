@@ -16,7 +16,10 @@ class IcyPano {
     viewFov = 60,
     nearPlane = 1,
     farPlane = 1000,
-    speed = 1
+    direction = null,
+    degElevation = 0,
+    degRotation = 0,
+    speed = 2
   } = {}) {
 
     // container for three.js
@@ -28,6 +31,9 @@ class IcyPano {
       viewFov: viewFov,
       nearPlane: nearPlane,
       farPlane: farPlane,
+      direction: direction,
+      degElevation: degElevation,
+      degRotation: degRotation,
       speed: speed
     };
 
@@ -35,25 +41,28 @@ class IcyPano {
     this.scene = {};
     this.camera = {};
     this.renderer = {};
+    this.target = {};
     this.insideConfig = {
       w: this.container.clientWidth,
       h: this.container.clientHeight,
       previewMode: true,
-      direction: null,
-      sphereRadius: 5,
+      sphereRadius: 500,
       widthSegment: 32,
       heightSegment: 32
     };
   }
 
   _initCamera() {
+    this.target = new THREE.Vector3();
     this.camera = new THREE.PerspectiveCamera(
       this.userConfig.viewFov,
       this.insideConfig.w / this.insideConfig.h,
       this.userConfig.nearPlane,
       this.userConfig.farPlane
     );
-    this.camera.position.z = 10;
+    this.camera.position.z = 0;
+    this.camera.position.x = 0;
+    this.camera.position.y = 0;
   }
 
   _initRenderer() {
@@ -85,24 +94,52 @@ class IcyPano {
 
   _renderCircle() {
     let __renderCircle = () => {
-      if (this.insideConfig.direction) {
-        switch (this.insideConfig.direction) {
+      if (this.userConfig.direction) {
+        switch (this.userConfig.direction) {
           case 'left':
-            //this.camera.position.
+            this.userConfig.degRotation = FloatCount(this.userConfig.degRotation, -this.userConfig.speed);
+            // if (this.userConfig.degRotation > 179) {
+            //   this.userConfig.degRotation -= 360;
+            // }
             break;
           case 'up':
+            if (this.userConfig.degElevation > 85) break;
+            this.userConfig.degElevation = FloatCount(this.userConfig.degElevation, this.userConfig.speed);
             break;
           case 'right':
+            this.userConfig.degRotation = FloatCount(this.userConfig.degRotation, this.userConfig.speed);
+            // if (this.userConfig.degRotation < -179) {
+            //   this.userConfig.degRotation += 360;
+            // }
             break;
           case 'down':
+            if (this.userConfig.degElevation < -85) break;
+            this.userConfig.degElevation = FloatCount(this.userConfig.degElevation, -this.userConfig.speed);
             break;
           case 'pull':
+            if (this.camera.fov < 5) break;
+            this.camera.fov = FloatCount(this.camera.fov, -this.userConfig.speed);
+            this.camera.updateProjectionMatrix();
             break;
           case 'push':
+            if (this.camera.fov > 115) break;
+            this.camera.fov = FloatCount(this.camera.fov, this.userConfig.speed);
+            this.camera.updateProjectionMatrix();
             break;
         }
 
       }
+
+      let elevation = THREE.Math.degToRad(this.userConfig.degElevation);
+      let rotation = THREE.Math.degToRad(this.userConfig.degRotation);
+
+      this.target.z = -this.insideConfig.sphereRadius * Math.cos(elevation) * Math.cos(rotation);
+      this.target.x = this.insideConfig.sphereRadius * Math.cos(elevation) * Math.sin(rotation);
+      // about elevation
+      this.target.y = this.insideConfig.sphereRadius * Math.sin(elevation);
+
+      this.camera.lookAt(this.target);
+
       this.renderer.render(this.scene, this.camera);
       requestAnimationFrame(__renderCircle);
     };
@@ -111,42 +148,48 @@ class IcyPano {
   }
 
   resize() {
+    // remain to be fixed
     this.insideConfig.w = this.container.clientHeight;
     this.insideConfig.h = this.container.clientWidth;
     this.renderer.setSize(this.insideConfig.w, this.insideConfig.h);
   }
 
+  // start or restart operation for TVOS
   TVOSOperation() {
+    // press key times
+    let holdTime = 0;
     // key hold
     let tvOperation = (e) => {
       switch (e.keyCode) {
         case 37:
-          this.insideConfig.direction = 'left';
+          this.userConfig.direction = 'left';
           break;
         case 38:
-          this.insideConfig.direction = 'up';
+          this.userConfig.direction = 'up';
           break;
         case 39:
-          this.insideConfig.direction = 'right';
+          this.userConfig.direction = 'right';
           break;
         case 40:
-          this.insideConfig.direction = 'down';
+          this.userConfig.direction = 'down';
           break;
         case 13:
+          holdTime += 1;
+          let holdTimeHandle = setTimeout(() => {
+            holdTime -= 1;
+          }, 1000);
           if (holdTime === 2) {
-            this.insideConfig.direction = 'pull';
+            this.userConfig.direction = 'pull';
           } else if (holdTime === 3) {
-            this.insideConfig.direction = 'push';
+            this.userConfig.direction = 'push';
           }
           break;
       }
-      console.log(this.insideConfig.direction);
     };
 
     // key end
     let directionClear = () => {
-      this.insideConfig.direction = null;
-      console.log('keyend');
+      this.userConfig.direction = null;
     };
 
     // attach event
@@ -168,13 +211,20 @@ class IcyPano {
     this._renderCircle();
   }
 
-  suspend({
+  // remove operation for TVOS
+  suspendTVOSOperation({
     tvOperation,
     directionClear
   }) {
     document.removeEventListener('keyhold', tvOperation);
     document.removeEventListener('keyend', directionClear);
   }
+}
+
+function FloatCount(num, speed) {
+  let direction = speed / Math.abs(speed);
+  let times = Math.abs(10 / speed);
+  return (num * times + direction) / times;
 }
 
 export default IcyPano;

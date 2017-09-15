@@ -1,7 +1,7 @@
 /!* AUTHOR: Ice Zero */
 import IcyPano from './components/icy-panorama.js';
 import './css/index.css';
-import pano1 from './assets/pano1.jpg'
+import pano from './assets/pano3.jpg'
 
 /* output */
 export default IcyPano;
@@ -10,9 +10,9 @@ export default IcyPano;
 let container = document.getElementById('app');
 let panorama = new IcyPano({
   container: container,
-  picUrl: pano1
+  picUrl: pano
 });
 
 panorama.start();
 let handle = panorama.TVOSOperation();
-// panorama.suspend(handle);
+// panorama.suspendTVOSOperation(handle);

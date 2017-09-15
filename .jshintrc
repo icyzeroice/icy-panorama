@@ -2,7 +2,8 @@
     "undef": true,
     "globals": {
         "document": true,
-        "console": true
+        "console": true,
+        "setTimeout": true
     },
     "unused": true,
     "esversion": 6
