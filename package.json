@@ -1,5 +1,5 @@
 {
-  "name": "webpack-demo",
+  "name": "icy-panorama.js",
   "version": "0.3.0",
   "description": "based on three.js",
   "main": "./src/components/icy-paronama.js",
