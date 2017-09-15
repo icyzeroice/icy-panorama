@@ -1,15 +1,19 @@
 {
   "name": "webpack-demo",
   "version": "1.0.0",
-  "description": "",
+  "description": "based on three.js",
   "main": "./src/components/icy-paronama.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node ./config/dev-server.js",
     "build": "node ./config/prod-build.js"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/icyzeroice/icy-panorama.js.git",
+  },
+  "keywords": ["three.js", "panorama", "TVOS"],
+  "author": "Ice Zero",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.0",
