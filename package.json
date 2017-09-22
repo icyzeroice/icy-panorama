@@ -1,6 +1,6 @@
 {
   "name": "icy-panorama",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "based on three.js",
   "main": "./src/components/icy-panorama.js",
   "scripts": {
@@ -12,7 +12,11 @@
     "type": "git",
     "url": "https://github.com/icyzeroice/icy-panorama.git"
   },
-  "keywords": ["three.js", "panorama", "TVOS"],
+  "keywords": [
+    "three.js",
+    "panorama",
+    "TVOS"
+  ],
   "author": "Ice Zero",
   "license": "ISC",
   "devDependencies": {
@@ -39,7 +43,6 @@
     "xml-loader": "^1.2.1"
   },
   "dependencies": {
-    "lodash": "^4.17.4",
     "three": "^0.87.1",
     "typescript": "^2.5.2"
   }
