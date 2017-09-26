@@ -5,16 +5,17 @@ icy-paronama.js
 ## feature
 
 * key events modified
+
 * keyboard operation
 
 
 ## todo list
 
-[ ] error message
+- [ ] error message
 
-[ ] mouse operation
+- [ ] mouse operation
 
-[ ] beautify loading page
+- [ ] beautify loading page
 
 
 ## usage
