@@ -31,4 +31,4 @@ Refer to demo for detail.
 
 ----
 
-This repository is just for fun, 
+This repository is just for fun, adding some project badges.
