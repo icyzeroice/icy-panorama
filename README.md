@@ -1,4 +1,5 @@
 icy-paronama.js
+====
 
 [![NPM](https://nodei.co/npm/icy-panorama.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/icy-panorama/)
 
