@@ -226,6 +226,7 @@ class IcyPano {
   }
 }
 
+// avoid floating point precision problem
 function FloatCount(num, speed) {
   let direction = speed / Math.abs(speed);
   let times = Math.abs(10 / speed);
