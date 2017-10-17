@@ -36,34 +36,43 @@ function processLoading(container) {
   this.processInfo = document.createElement('div');
 
   this.init = function () {
-    this.processWindow.style.position = 'absolute';
-    this.processWindow.style.zIndex = 20;
-    this.processWindow.style.width = '100%';
-    this.processWindow.style.height = '100%';
-    this.processWindow.style.backgroundColor = this.windowColor;
-    this.processWindow.style.opacity = 1;
+    addStyle(this.processWindow, {
+      position: 'absolute',
+      zIndex: 20,
+      width: '100%',
+      height: '100%',
+      backgroundColor: this.windowColor,
+      opacity: 1
+    });
 
-    this.processBar.style.position = 'absolute';
-    this.processBar.style.width = 0;
-    this.processBar.style.height = '100%';
-    this.processBar.style.backgroundColor = this.barColor;
-
-    this.processInfo.style.position = 'absolute';
-    this.processInfo.style.bottom = '51%';
-    this.processInfo.style.left = '40%';
-    this.processInfo.style.width = '20%';
-    this.processInfo.style.fontSize = 50;
-    this.processInfo.style.textAlign = 'center';
-    this.processInfo.style.color = this.fontColor;
-
+    addStyle(this.processBar, {
+      position: 'absolute',
+      width: 0,
+      height: '100%',
+      backgroundColor: this.barColor
+    });
+    
+    addStyle(this.processInfo, {
+      position: 'absolute',
+      bottom: '51%',
+      left: '40%',
+      width: '20%',
+      fontSize: 50,
+      textAlign: 'center',
+      color: this.fontColor
+    });
+    
     let loadingImg = new Image();
     loadingImg.src = loadingUrl;
-    loadingImg.style.position = 'absolute';
-    loadingImg.style.zIndex = 30;
-    loadingImg.style.height ='5%';
-    loadingImg.style.top = '50%';
-    loadingImg.style.left = '48.6%';
-
+    
+    addStyle(loadingImg, {
+      position: 'absolute',
+      zIndex: 30,
+      height: '5%',
+      top: '50%',
+      left: '48.6%'
+    });
+    
     container.appendChild(this.processWindow);
     this.processWindow.appendChild(loadingImg);
     this.processWindow.appendChild(this.processBar);
@@ -101,6 +110,13 @@ function imageReader(response, callback) {
     // true data url
     callback(e.target.result);
   }
+}
+
+function addStyle(target, options) {
+  for (let attribute in options) {
+    target.style[attribute] = options[attribute];
+  }
+  return this;
 }
 
 export default ImgLoading;
